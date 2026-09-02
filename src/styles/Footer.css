@@ -1,0 +1,65 @@
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+  padding: 60px 8%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: center;
+  gap: 30px;
+  color: #777;
+}
+
+footer strong {
+  display: block;
+  color: #fff;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+footer span {
+  font-size: 12px;
+}
+
+.socials {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+}
+
+.socials a {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.socials a:hover {
+  color: #d4af37;
+}
+
+footer p {
+  text-align: right;
+  font-size: 11px;
+}
+
+@media (max-width: 900px) {
+  footer {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  footer p {
+    text-align: center;
+  }
+
+  .socials {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 600px) {
+  footer {
+    padding: 50px 5%;
+  }
+}

@@ -1,0 +1,6 @@
+body{margin:0;background:#0a0a0a;color:#f2f2f2;font-family:system-ui,sans-serif}
+header{padding:80px 40px;text-align:center;border-bottom:1px solid #333}
+h1{font-size:4rem;margin:0;letter-spacing:-2px}
+p.subtitle{font-size:1.5rem;color:#aaa;margin-top:10px}
+section{padding:60px 40px;max-width:800px;margin:0 auto;border-top:1px solid #222}
+h2{font-size:2rem;margin-bottom:20px}
