@@ -1,6 +1,6 @@
 import { useRef } from "react"
 import { useEffect, useState } from "react"
-import "../styles/home.css";
+import "../styles/Home.css";
 import me from "../assets/mes.png";
 import logoVideo from "../assets/logo.webm";
 // import logo from "../assets/20251121_065728.png";
