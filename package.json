@@ -1,5 +1,7 @@
-
 {
+  "name": "soldado-profile",
+  "version": "1.0.0",
+  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -10,8 +12,10 @@
     "react-dom": "^18.3.1"
   },
   "devDependencies": {
-    "@vitejs/plugin-react": "^6.1.1",
-    "vite": "^8.2.2",
-    "vercel": "^59.11.2"
-  }
+    "@vitejs/plugin-react": "^4.3.4",
+    "vite": "^5.4.11"
+  },
+  "trustedDependencies": [
+    "esbuild"
+  ]
 }
