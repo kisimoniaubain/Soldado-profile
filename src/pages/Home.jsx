@@ -263,6 +263,28 @@ function Home() {
           ))}
         </div>
       </section>
+            <section className="services-section content-section" id="services">
+        <div className="section-heading">
+          <div>
+            <div className="section-label">04 / SERVICES</div>
+            <h2>WHAT I CAN DO.</h2>
+          </div>
+          <p>
+            Comprehensive product execution covering the entire spectrum from
+            initial branding to robust client deployment.
+          </p>
+        </div>
+        <div className="service-grid">
+          {services.map(([num, title, text]) => (
+            <article className="service-card" key={title}>
+              <b>{num}</b>
+              <h3>{title}</h3>
+              <p>{text}</p>
+              <small>REACT • TYPESCRIPT • FIGMA • NODE.JS</small>
+            </article>
+          ))}
+        </div>
+      </section>
       <section className="work-section content-section" id="work">
         <div className="section-heading">
           <div>
@@ -314,28 +336,7 @@ function Home() {
           ))}
         </div>
       </section>
-      <section className="services-section content-section" id="services">
-        <div className="section-heading">
-          <div>
-            <div className="section-label">04 / SERVICES</div>
-            <h2>WHAT I CAN DO.</h2>
-          </div>
-          <p>
-            Comprehensive product execution covering the entire spectrum from
-            initial branding to robust client deployment.
-          </p>
-        </div>
-        <div className="service-grid">
-          {services.map(([num, title, text]) => (
-            <article className="service-card" key={title}>
-              <b>{num}</b>
-              <h3>{title}</h3>
-              <p>{text}</p>
-              <small>REACT • TYPESCRIPT • FIGMA • NODE.JS</small>
-            </article>
-          ))}
-        </div>
-      </section>
+
       <section className="contact-section" id="contact">
         <div className="section-label">05 / CONTACT</div>
         <h2>HAVE AN IDEA? LET'S BUILD IT.</h2>
