@@ -1,23 +1,9 @@
 function Footer() {
   return (
     <footer>
-      <div>
-        <strong>KISIMONI AUBAIN</strong>
-
-        <span>
-          Frontend Developer & Graphic Designer
-        </span>
-      </div>
-
-      <div className="socials">
-        <a href="#">GitHub</a>
-        <a href="#">LinkedIn</a>
-        <a href="#">Instagram</a>
-      </div>
-
-      <p>
-        © 2026 Kisimoni Aubain. All rights reserved.
-      </p>
+      <div><strong>KISIMONI AUBAIN</strong><span>CREATIVE ENGINEERING &amp; MOTION TELEMETRY // MATRIX v4.8</span></div>
+      <div className="socials"><a href="#">GitHub</a><a href="#">Dribbble</a><a href="#">Figma</a><a href="#">LinkedIn</a></div>
+      <p>© 2026 KISIMONI AUBAIN. ARCHITECTED UNDER TECH-LUXE PROTOCOL.</p>
     </footer>
   );
 }

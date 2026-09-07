@@ -1,590 +1,353 @@
-import { useRef } from "react"
-import { useEffect, useState } from "react"
+import { useState } from "react";
+import me from "../assets/me.png";
 import "../styles/Home.css";
-import me from "../assets/mes.png";
-import logoVideo from "../assets/logo.webm";
-// import logo from "../assets/20251121_065728.png";
+
+const skills = [
+  [
+    "01",
+    "FRAMEWORK",
+    "React",
+    "Modular component architectures, state hooks, reactive UI flows",
+  ],
+  [
+    "02",
+    "RUNTIME",
+    "JavaScript",
+    "ES6+, asynchronous event loops, DOM orchestration, and Web APIs",
+  ],
+  [
+    "03",
+    "STRICT TYPE",
+    "TypeScript",
+    "Type-safe interfaces, predictable runtime bounds, strict telemetry",
+  ],
+  [
+    "04",
+    "MARKUP",
+    "HTML5",
+    "Semantic hierarchy, accessibility protocols, structured nodes",
+  ],
+  [
+    "05",
+    "STYLING",
+    "CSS3",
+    "Modern Grid, Flexbox, transitions, variables, and responsive units",
+  ],
+  [
+    "06",
+    "UTILITY",
+    "Tailwind CSS",
+    "Rapid atomic styling and tokenized design systems",
+  ],
+  [
+    "07",
+    "BACKEND",
+    "Node.js",
+    "Server-side I/O engines, microservices, headless APIs",
+  ],
+  [
+    "08",
+    "ROUTING",
+    "Express",
+    "RESTful endpoints, modular middleware, authentication",
+  ],
+  [
+    "09",
+    "DATABASE",
+    "MongoDB",
+    "Document stores and robust aggregation pipelines",
+  ],
+  [
+    "10",
+    "VERSION",
+    "Git & GitHub",
+    "Branching strategies, CI/CD, atomic commits",
+  ],
+  [
+    "11",
+    "PRODUCT",
+    "UI/UX Design",
+    "User journeys, wireframing, high-fidelity prototypes",
+  ],
+  [
+    "12",
+    "VISUAL",
+    "Graphic Design",
+    "Brand identities, typography, spatial balance, layout",
+  ],
+];
+
+const projects = [
+  [
+    "01",
+    "PLATFORM",
+    "Topline",
+    "A modern social media platform interface with stories, messaging, notifications, posts and video experiences.",
+    "React / CSS / JavaScript",
+    "web",
+  ],
+  [
+    "02",
+    "FULL-STACK",
+    "Patientor",
+    "A full-stack medical record application for managing patients, diagnoses and healthcare entries.",
+    "React / TypeScript / Node.js",
+    "web",
+  ],
+  [
+    "03",
+    "IDENTITY",
+    "Creative Brand",
+    "A visual identity and digital experience combining graphic design, typography and modern web development.",
+    "Branding / Design / Web",
+    "graphic",
+  ],
+  [
+    "04",
+    "CAMPAIGN",
+    "Visual Direction",
+    "Editorial artwork, campaign direction, and polished visual systems built for memorable brand moments.",
+    "Branding / Posters / Art Direction",
+    "graphic",
+  ],
+  [
+    "05",
+    "IDENTITY",
+    "Mono Archive",
+    "A graphic identity study exploring typography, contrast, composition, and tactile digital layouts.",
+    "Identity / Typography / Layout",
+    "graphic",
+  ],
+];
+
+const services = [
+  [
+    "01",
+    "Frontend Development",
+    "Responsive and interactive websites built with modern frontend technologies, smooth kinetic animations, and rock-solid performance optimization.",
+  ],
+  [
+    "02",
+    "UI / UX Design",
+    "Clean, intuitive interfaces designed around usability and strong visual hierarchy. Wireframing, prototyping, and design system governance.",
+  ],
+  [
+    "03",
+    "Graphic Design",
+    "Logos, branding, posters, and digital visuals that communicate clearly and creatively with distinctive aesthetic character.",
+  ],
+  [
+    "04",
+    "Full-Stack Development",
+    "Complete web applications connecting modern frontend interfaces with reliable backend systems, custom APIs, and scalable databases.",
+  ],
+];
 
 function Home() {
-      {/* =========================================================
-      WAVY BOTTOM DIVIDER
-  ========================================================= */}
-const WavyBottomDivider = () => (
-  <div className="wavy-divider">
-    <svg
-      viewBox="0 0 1200 120"
-      preserveAspectRatio="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path d="M0,0 C150,90 350,-40 500,65 C650,160 900,10 1200,45 L1200,120 L0,120 Z" />
-    </svg>
-  </div>
-);
-  const projects = [
-    {
-      number: "01",
-      title: "Topline",
-      description:
-        "A modern social media platform interface with stories, messaging, notifications, posts and video experiences.",
-      tags: ["React", "CSS", "JavaScript"],
-    },
-    {
-      number: "02",
-      title: "Patientor",
-      description:
-        "A full-stack medical record application for managing patients, diagnoses and healthcare entries.",
-      tags: ["React", "TypeScript", "Node.js"],
-    },
-    {
-      number: "03",
-      title: "Creative Brand",
-      description:
-        "A visual identity and digital experience combining graphic design, typography and modern web development.",
-      tags: ["Branding", "Design", "Web"],
-    },
-  ];
-
-  const skills = [
-    "React",
-    "JavaScript",
-    "TypeScript",
-    "HTML",
-    "CSS",
-    "Tailwind CSS",
-    "Node.js",
-    "Express",
-    "MongoDB",
-    "Git & GitHub",
-    "UI/UX Design",
-    "Graphic Design",
-  ];
-
+  const [workCategory, setWorkCategory] = useState("web");
+  const visibleProjects = projects.filter(
+    ([, , , , , category]) => category === workCategory,
+  );
 
   return (
-    <main>
-      {/* ================================
-          HERO
-      ================================= */}
-
-      <header className="hero" id="home">
-
-        <div className="hero-background">
-
-          {/* CODING */}
-
-          <span className="floating-item item-1">
-            <i className="fa-brands fa-react"></i>
-          </span>
-
-          <span className="floating-item item-2">
-            <i className="fa-brands fa-js"></i>
-          </span>
-
-          <span className="floating-item item-3">
-            <i className="fa-brands fa-html5"></i>
-          </span>
-
-          <span className="floating-item item-4">
-            <i className="fa-brands fa-css3-alt"></i>
-          </span>
-
-          <span className="floating-item item-5">
-            <i className="fa-brands fa-node-js"></i>
-          </span>
-
-          <span className="floating-item item-6">
-            <i className="fa-brands fa-github"></i>
-          </span>
-
-          <span className="floating-item item-7">
-            <i className="fa-brands fa-npm"></i>
-          </span>
-
-          <span className="floating-item item-8">
-            <i className="fa-brands fa-git-alt"></i>
-          </span>
-
-
-          {/* DEVELOPMENT */}
-
-          <span className="floating-item item-9">
-            &lt;/&gt;
-          </span>
-
-          <span className="floating-item item-10">
-            {"{ }"}
-          </span>
-
-          <span className="floating-item item-11">
-            &lt;/&gt;
-          </span>
-
-          <span className="floating-item item-12">
-            <i className="fa-solid fa-code"></i>
-          </span>
-
-
-          {/* DESIGN */}
-
-          <span className="floating-item item-13">
-            <i className="fa-brands fa-figma"></i>
-          </span>
-
-          <span className="floating-item item-14">
-            <i className="fa-solid fa-pen-nib"></i>
-          </span>
-
-          <span className="floating-item item-15">
-            <i className="fa-solid fa-palette"></i>
-          </span>
-
-          <span className="floating-item item-16">
-            <i className="fa-solid fa-bezier-curve"></i>
-          </span>
-
-          <span className="floating-item item-17">
-            <i className="fa-solid fa-vector-square"></i>
-          </span>
-
-          <span className="floating-item item-18">
-            <i className="fa-solid fa-image"></i>
-          </span>
-
-
-          {/* DESIGN TOOLS */}
-
-          <span className="floating-item item-19">
-            PS
-          </span>
-
-          <span className="floating-item item-20">
-            AI
-          </span>
-
-          <span className="floating-item item-21">
-            XD
-          </span>
-
-          <span className="floating-item item-22">
-            FIGMA
-          </span>
-
-
-          {/* TECHNOLOGY */}
-
-          <span className="floating-item item-23">
-            TS
-          </span>
-
-          <span className="floating-item item-24">
-            SQL
-          </span>
-
-          <span className="floating-item item-25">
-            API
-          </span>
-
-          <span className="floating-item item-26">
-            JSON
-          </span>
-
-          <span className="floating-item item-27">
-            UI
-          </span>
-
-          <span className="floating-item item-28">
-            UX
-          </span>
-
-
-          {/* SOCIAL MEDIA */}
-
-          <span className="floating-item item-29">
-            <i className="fa-brands fa-instagram"></i>
-          </span>
-
-          <span className="floating-item item-30">
-            <i className="fa-brands fa-facebook-f"></i>
-          </span>
-
-          <span className="floating-item item-31">
-            <i className="fa-brands fa-linkedin-in"></i>
-          </span>
-
-          <span className="floating-item item-32">
-            <i className="fa-brands fa-x-twitter"></i>
-          </span>
-
-          <span className="floating-item item-33">
-            <i className="fa-brands fa-youtube"></i>
-          </span>
-
-          <span className="floating-item item-34">
-            <i className="fa-brands fa-tiktok"></i>
-          </span>
-
+    <main className="portfolio-main">
+      <div className="hud-bar">
+        <span>
+          <b>●</b> SYS.LOC // 45.5152° N, 122.6784° W
+        </span>
+        <span className="release">PORTFOLIO_RELEASE // v2.5.0-PROD</span>
+        <div>
+          <a href="#about">[01_ABOUT]</a>
+          <a href="#skills">[02_SKILLS]</a>
+          <a href="#work">[03_WORK]</a>
+          <a href="#services">[04_SERVICES]</a>
+          <a href="#contact">[05_CONTACT]</a>
         </div>
-
-        <div className="hero-overlay"></div>
-
-        <div className="hero-content">
-
-
-          {/* <div className="logo">
-            <video
-              src={logoVideo}
-              autoPlay
-              loop
-              muted
-              playsInline
-              className="logo-video"
-            />
-          </div> */}
-
-          <p className="eyebrow">
-            HELLO..!
-          </p>
-
+      </div>
+      <section className="hero-section" id="home">
+        <div className="hero-copy">
+          <div className="telemetry-tag">
+            ● HELLO..! <span>// STATUS: AVAILABLE</span>
+          </div>
           <h1>
-            I BUILD
-            <br />
-            <span>DIGITAL</span>
-            <br />
-            EXPERIENCES.
+            I BUILD <em>DIGITAL</em>
+            <br /> EXPERIENCES.
           </h1>
-
-          <p className="hero-description">
+          <p>
             I'm <strong>Kisimoni Aubain</strong>, a frontend developer and
             graphic designer creating modern websites, digital products and
-            visual experiences.
+            high-fidelity visual experiences.
           </p>
-
-        </div>
-
-        <div className="hero-side">
-
-          <div className="circle">
-
-            <img
-              src={me}
-              alt="Kisimoni Aubain"
-            />
-
-          </div>
-
-        </div>
-        <WavyBottomDivider />
-      </header>
-
-
-      {/* ================================
-          ABOUT
-      ================================= */}
-
-      <section className="about section" id="about">
-
-        <div className="section-label">
-          01 / ABOUT
-        </div>
-
-        <div className="about-grid">
-
-          <div>
-            <h2>
-              Turning ideas into
-              <span> digital reality.</span>
-            </h2>
-          </div>
-
-          <div className="about-text">
-
-            <p>
-              I am a creative developer and graphic designer passionate about
-              building meaningful digital experiences.
-            </p>
-
-            <p>
-              I combine clean frontend development with strong visual design
-              to create websites and applications that are functional,
-              responsive and visually memorable.
-            </p>
-
-            <p>
-              My work focuses on modern technologies, thoughtful interfaces
-              and experiences that put people first.
-            </p>
-
-            <a href="#contact" className="text-link">
-              More about me →
+          <div className="hero-actions">
+            <a className="button-primary" href="#contact">
+              EXPLORE COLLABORATION <span>→</span>
             </a>
-
+            <a className="button-secondary" href="mailto:hello@kisimoni.dev">
+              ⌘ hello@kisimoni.dev
+            </a>
           </div>
-
-        </div>
-
-      </section>
-
-
-      {/* ================================
-          SKILLS
-      ================================= */}
-
-      <section className="skills section">
-
-        <div className="section-label">
-          02 / SKILLS
-        </div>
-
-        <div className="skills-content">
-
-          <h2>
-            TOOLS & TECHNOLOGIES
-          </h2>
-
-          <div className="skills-grid">
-
-            {skills.map((skill, index) => (
-
-              <div
-                className="skill"
-                key={skill}
-              >
-
-                <span>
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-
-                {skill}
-
-              </div>
-
-            ))}
-
+          <div className="stack-line">
+            <span>DEPLOYED STACK:</span>
+            <b>REACT</b>
+            <b>TS</b>
+            <b>TAILWIND</b>
+            <b>FIGMA</b>
+            <b>NODE</b>
+            <b>GIT</b>
           </div>
-
         </div>
-
+        <div className="hero-visual">
+          <div className="orbit">
+            <span className="orbit-label top">NODE.ME</span>
+            <span className="orbit-label bottom">DEV//DSGN</span>
+            <img src={me} alt="Kisimoni Aubain" />
+          </div>
+          <div className="wordmark">
+            <span>CORE_SIGNATURE // ACTIVE</span>
+            <strong>SOLDADO</strong>
+            <small>DIGITAL ENGINEERING LABS</small>
+          </div>
+        </div>
       </section>
-
-
-      {/* ================================
-          WORK
-      ================================= */}
-
-      <section
-        className="work section"
-        id="work"
-      >
-
-        <div className="section-label">
-          03 / SELECTED WORK
-        </div>
-
-        <div className="work-heading">
-
-          <h2>
-            PROJECTS
+      <section className="about-section content-section" id="about">
+        <div className="section-label">01 / ABOUT</div>
+        <div>
+          <h2>Turning ideas into digital reality.</h2>
+          <div className="philosophy">
+            PHILOSOPHY // VECTOR_01
             <br />
-            <span>THAT MATTER.</span>
-          </h2>
-
+            <span>
+              Bridging the gap between rigid software architecture and emotive
+              cinematic user experience.
+            </span>
+          </div>
+        </div>
+        <div className="about-copy">
+          <p className="lead">
+            I am a creative developer and graphic designer passionate about
+            building meaningful digital experiences. With a foundation spanning
+            visual hierarchy and modern front-end engineering, I craft intuitive
+            interfaces that resonate on an emotional level while remaining
+            computationally optimized.
+          </p>
+          <p>
+            I combine clean frontend development with strong visual design
+            principles to produce digital products that leave lasting
+            impressions. Every micro-interaction, transition timing curve, and
+            layout anchor is calibrated to feel direct, responsive, and
+            seamless.
+          </p>
+          <a href="#contact">MORE ABOUT ME →</a>
+        </div>
+      </section>
+      <section className="skills-section content-section" id="skills">
+        <div className="section-heading">
+          <div>
+            <div className="section-label pink">02 / SKILLS</div>
+            <h2>TOOLS &amp; TECHNOLOGIES</h2>
+          </div>
+          <p>
+            A calibrated telemetry readout of engineering protocols, frameworks,
+            and creative software suites.
+          </p>
+        </div>
+        <div className="skill-grid">
+          {skills.map(([num, type, name, text]) => (
+            <article className="skill-card" key={name}>
+              <span>
+                {num} // {type}
+              </span>
+              <h3>{name}</h3>
+              <p>{text}.</p>
+            </article>
+          ))}
+        </div>
+      </section>
+      <section className="work-section content-section" id="work">
+        <div className="section-heading">
+          <div>
+            <div className="section-label">03 / SELECTED WORK</div>
+            <h2>PROJECTS THAT MATTER.</h2>
+          </div>
           <p>
             A selection of projects where development, design and creativity
-            come together.
+            come together to solve tangible problems.
           </p>
-
         </div>
-
-        <div className="projects">
-
-          {projects.map((project) => (
-
-            <article
-              className="project"
-              key={project.number}
-            >
-
-              <div className="project-number">
-                {project.number}
+        <div className="work-tabs" role="tablist" aria-label="Work categories">
+          <button
+            className={workCategory === "web" ? "active" : ""}
+            onClick={() => setWorkCategory("web")}
+            role="tab"
+            aria-selected={workCategory === "web"}
+          >
+            Web Development
+          </button>
+          <button
+            className={workCategory === "graphic" ? "active" : ""}
+            onClick={() => setWorkCategory("graphic")}
+            role="tab"
+            aria-selected={workCategory === "graphic"}
+          >
+            Graphic Works
+          </button>
+        </div>
+        <div className="project-grid">
+          {visibleProjects.map(([id, type, name, text, tags]) => (
+            <article className="project-card" key={name}>
+              <div className="terminal-bar">
+                <span>● ● ●</span> NODE.{id} // {type}
               </div>
-
-              <div className="project-main">
-
-                <div className="project-preview">
-                  <span>
-                    {project.title}
-                  </span>
-                </div>
-
-                <div className="project-info">
-
-                  <h3>
-                    {project.title}
-                  </h3>
-
-                  <p>
-                    {project.description}
-                  </p>
-
-                  <div className="project-tags">
-
-                    {project.tags.map((tag) => (
-
-                      <span key={tag}>
-                        {tag}
-                      </span>
-
-                    ))}
-
-                  </div>
-
-                  <button className="project-link">
-                    View Project ↗
-                  </button>
-
-                </div>
-
+              <div className={`project-art art-${id}`}>
+                <i>{name}</i>
               </div>
-
+              <div className="project-info">
+                <small>
+                  {id} / {type}
+                </small>
+                <h3>{name}</h3>
+                <p>{text}</p>
+                <span className="project-tags">{tags}</span>
+                <a href="#contact">VIEW PROJECT ↗</a>
+              </div>
             </article>
-
           ))}
-
         </div>
-
       </section>
-
-
-      {/* ================================
-          SERVICES
-      ================================= */}
-
-      <section
-        className="services section"
-        id="services"
-      >
-
-        <div className="section-label">
-          04 / SERVICES
+      <section className="services-section content-section" id="services">
+        <div className="section-heading">
+          <div>
+            <div className="section-label">04 / SERVICES</div>
+            <h2>WHAT I CAN DO.</h2>
+          </div>
+          <p>
+            Comprehensive product execution covering the entire spectrum from
+            initial branding to robust client deployment.
+          </p>
         </div>
-
-        <h2 className="services-title">
-          WHAT I
-          <br />
-          <span>CAN DO.</span>
-        </h2>
-
-        <div className="services-list">
-
-          <div className="service">
-
-            <span>01</span>
-
-            <div>
-              <h3>
-                Frontend Development
-              </h3>
-
-              <p>
-                Responsive and interactive websites built with modern
-                frontend technologies.
-              </p>
-            </div>
-
-          </div>
-
-
-          <div className="service">
-
-            <span>02</span>
-
-            <div>
-              <h3>
-                UI / UX Design
-              </h3>
-
-              <p>
-                Clean, intuitive interfaces designed around usability and
-                strong visual hierarchy.
-              </p>
-            </div>
-
-          </div>
-
-
-          <div className="service">
-
-            <span>03</span>
-
-            <div>
-              <h3>
-                Graphic Design
-              </h3>
-
-              <p>
-                Logos, branding, posters and digital visuals that communicate
-                clearly and creatively.
-              </p>
-            </div>
-
-          </div>
-
-
-          <div className="service">
-
-            <span>04</span>
-
-            <div>
-              <h3>
-                Full-Stack Development
-              </h3>
-
-              <p>
-                Complete web applications connecting modern frontend
-                interfaces with reliable backend systems.
-              </p>
-            </div>
-
-          </div>
-
+        <div className="service-grid">
+          {services.map(([num, title, text]) => (
+            <article className="service-card" key={title}>
+              <b>{num}</b>
+              <h3>{title}</h3>
+              <p>{text}</p>
+              <small>REACT • TYPESCRIPT • FIGMA • NODE.JS</small>
+            </article>
+          ))}
         </div>
-
       </section>
-
-
-      {/* ================================
-          CONTACT
-      ================================= */}
-
-      <section
-        className="cta"
-        id="contact"
-      >
-
-        <div className="cta-label">
-          05 / CONTACT
-        </div>
-
-        <h2>
-          HAVE AN IDEA?
-          <br />
-          <span>LET'S BUILD IT.</span>
-        </h2>
-
+      <section className="contact-section" id="contact">
+        <div className="section-label">05 / CONTACT</div>
+        <h2>HAVE AN IDEA? LET'S BUILD IT.</h2>
         <p>
           I'm always interested in new projects, creative collaborations and
-          opportunities to build something meaningful.
+          opportunities to build something meaningful together.
         </p>
-
-        <a
-          href="mailto:hello@kisimoni.dev"
-          className="contact-button"
-        >
+        <a className="contact-button" href="mailto:hello@kisimoni.dev">
           hello@kisimoni.dev ↗
         </a>
-
+        <small>● CURRENT QUEUE: OPEN FOR Q2-Q3 COLLABORATIONS</small>
       </section>
-
     </main>
   );
 }

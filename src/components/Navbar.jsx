@@ -1,22 +1,16 @@
+import { useState } from "react";
+
 function Navbar() {
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const closeMenu = () => setMenuOpen(false);
+
   return (
-    <nav className="navbar">
-      <div className="logo">
-        SOLDADO<span>.</span>
-      </div>
-
-      <div className="nav-links">
-        <a href="#home">Home</a>
-        <a href="#about">About</a>
-        <a href="#work">Work</a>
-        <a href="#services">Services</a>
-        <a href="#contact">Contact</a>
-      </div>
-
-      <a href="#contact" className="nav-button">
-        Let's Talk
-      </a>
-    </nav>
+    <header className="site-header">
+      <div className="brand-lockup"><span className="status-dot" /><a href="#home" className="brand-name">KISIMONI AUBAIN <span>// DEV &amp; DESIGN</span></a></div>
+      <button className={`menu-dots ${menuOpen ? "open" : ""}`} type="button" aria-label="Toggle navigation" aria-expanded={menuOpen} onClick={() => setMenuOpen((open) => !open)}><span /><span /><span /></button>
+      <nav className={`nav-links ${menuOpen ? "open" : ""}`}><a href="#home" onClick={closeMenu}>Home</a><a href="#about" onClick={closeMenu}>About</a><a href="#skills" onClick={closeMenu}>Skills</a><a href="#services" onClick={closeMenu}>What I Do</a><a href="#work" onClick={closeMenu}>Works</a><a href="#contact" onClick={closeMenu}>Contact</a></nav>
+    </header>
   );
 }
 

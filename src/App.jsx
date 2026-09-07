@@ -1,11 +1,11 @@
-// import Navbar from "./components/Navbar";
+import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import Footer from "./components/Footer";
 
 function App() {
   return (
     <div className="portfolio">
-      {/* <Navbar /> */}
+      <Navbar />
       <Home />
       <Footer />
     </div>
