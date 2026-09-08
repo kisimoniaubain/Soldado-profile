@@ -22,6 +22,103 @@ a {
   color: inherit;
   text-decoration: none;
 }
+.custom-cursor-enabled,
+.custom-cursor-enabled {
+  cursor: auto;
+}
+.custom-cursor-enabled a,
+.custom-cursor-enabled button {
+  cursor: pointer;
+}
+.custom-cursor {
+  width: 1px;
+  height: 1px;
+  position: fixed;
+  z-index: 2000;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+.custom-cursor.is-visible { opacity: 1; }
+.custom-cursor-dot,
+.custom-cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: block;
+  transform: translate(-50%, -50%);
+}
+.custom-cursor-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #00f5ff;
+  box-shadow: 0 0 12px rgba(0, 245, 255, 0.9);
+}
+.custom-cursor-dot.hovering {
+  width: 6px;
+  height: 6px;
+
+  background: #f70404;
+  color: red;
+
+  box-shadow:
+    0 0 10px #00f5ff,
+    0 0 25px rgba(0, 245, 255, 0.8);
+}
+.custom-cursor-ring {
+  width: 22px;
+  height: 22px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(0, 247, 255, 0.925);
+  background: #00f7ff1f;
+  border-radius: 50%;
+  color: #00f5ff;
+  transform: translate(-50%, -50%) rotate(var(--cursor-angle, 0rad)) scaleX(var(--cursor-stretch, 1)) scaleY(var(--cursor-squash, 1));
+  transition: width 0.25s ease, height 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+}
+/* .custom-cursor-ring.hovering {
+  width: 25px;
+  height: 25px;
+  background: rgba(255, 177, 197, 0.12);
+  border-color: #ffb1c5;
+  box-shadow: 0 0 30px #ffb1c5;
+} */
+
+.custom-cursor-ring::after {
+  content: "";
+  opacity: 0;
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  transition: opacity 0.2s ease;
+}
+
+.custom-cursor-ring.hovering::after {
+  content: " ";
+  opacity: 1;
+}
+.custom-cursor-label {
+  opacity: 0;
+  font: 600 8px "JetBrains Mono", monospace;
+  letter-spacing: 0.08em;
+  transform: scale(0.7);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.custom-cursor
+.is-hovering 
+.custom-cursor-label {
+  opacity: 1;
+  transform: scale(1);
+}
+.custom-cursor
+.is-image 
+.custom-cursor-ring {
+  border: 1px solid #ffb1c5;
+}
 .portfolio {
   min-height: 100vh;
 }

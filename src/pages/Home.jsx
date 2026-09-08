@@ -1,5 +1,7 @@
 import { useState } from "react";
 import me from "../assets/me.png";
+import soldadoLogo from "../assets/20251121_065728.png";
+import soldadoMark from "../assets/20251121_0657281.png";
 import "../styles/Home.css";
 
 const skills = [
@@ -80,43 +82,94 @@ const skills = [
 const projects = [
   [
     "01",
-    "PLATFORM",
-    "Topline",
-    "A modern social media platform interface with stories, messaging, notifications, posts and video experiences.",
+    "WEB EXPERIENCE",
+    "Challenger",
+    "A focused web experience built to turn a clear idea into an engaging digital product.",
     "React / CSS / JavaScript",
-    "web",
+    "https://challenger-2-uqtu.onrender.com/",
   ],
   [
     "02",
-    "FULL-STACK",
-    "Patientor",
-    "A full-stack medical record application for managing patients, diagnoses and healthcare entries.",
-    "React / TypeScript / Node.js",
-    "web",
+    "CREATIVE PLATFORM",
+    "Growing Creative",
+    "A bold creative web experience with a strong visual system and responsive presentation.",
+    "React / Design / Responsive UI",
+    "https://growing-creative.onrender.com/",
   ],
   [
     "03",
-    "IDENTITY",
-    "Creative Brand",
-    "A visual identity and digital experience combining graphic design, typography and modern web development.",
-    "Branding / Design / Web",
-    "graphic",
+    "PRODUCT EXPERIENCE",
+    "UseCorg",
+    "A polished product interface designed around clarity, interaction, and a confident brand presence.",
+    "React / UI Design / JavaScript",
+    "https://usecorg.vercel.app/",
   ],
   [
     "04",
-    "CAMPAIGN",
-    "Visual Direction",
-    "Editorial artwork, campaign direction, and polished visual systems built for memorable brand moments.",
-    "Branding / Posters / Art Direction",
-    "graphic",
+    "E-COMMERCE",
+    "Soldy Home Shop",
+    "A home-focused shopping experience that combines product discovery with a clean, welcoming interface.",
+    "React / E-commerce / CSS",
+    "https://soldyhomeshop.onrender.com",
   ],
   [
     "05",
+    "COMMUNITY HUB",
+    "Codust Hub",
+    "A community-driven digital hub created for browsing, connection, and shared resources.",
+    "React / JavaScript / UI Systems",
+    "https://codust-hub.vercel.app/",
+  ],
+  [
+    "06",
+    "SOCIAL PLATFORM",
+    "Topline",
+    "A modern social media platform interface with stories, messaging, notifications, posts, and video experiences.",
+    "React / CSS / JavaScript",
+    "https://topline-irjw.onrender.com/",
+  ],
+];
+
+const graphicProjects = [
+  [
+    "01",
     "IDENTITY",
+    "Creative Brand",
+    "A visual identity and digital experience combining graphic design, typography, and modern web development.",
+    "Branding / Design / Web",
+    "#contact",
+    soldadoLogo,
+    "brand",
+  ],
+  [
+    "02",
+    "POSTER",
+    "Visual Direction",
+    "Editorial artwork, campaign direction, and polished visual systems built for memorable brand moments.",
+    "Branding / Posters / Art Direction",
+    "#contact",
+    soldadoMark,
+    "poster",
+  ],
+  [
+    "03",
+    "LOGO",
     "Mono Archive",
     "A graphic identity study exploring typography, contrast, composition, and tactile digital layouts.",
     "Identity / Typography / Layout",
-    "graphic",
+    "#contact",
+    soldadoMark,
+    "logo",
+  ],
+  [
+    "04",
+    "FLYER",
+    "Campaign Flyer",
+    "A promotional flyer concept balancing bold type, clear messaging, and a memorable visual rhythm.",
+    "Flyer / Typography / Art Direction",
+    "#contact",
+    soldadoLogo,
+    "flayer",
   ],
 ];
 
@@ -143,11 +196,34 @@ const services = [
   ],
 ];
 
+const benchmarkTools = [
+  ["01", "React.js", "SPA & Hooks Architecture", 97],
+  ["02", "TypeScript", "Strict Type Safety & Generics", 95],
+  ["03", "JavaScript ES6+", "Async, DOM & Event Loop", 98],
+  ["04", "HTML5 & ARIA", "Accessible DOM Structuring", 99],
+  ["05", "Tailwind / CSS3", "Responsive & Grid Systems", 97],
+  ["06", "Node.js & Express", "REST APIs & Middleware", 92],
+  ["07", "MongoDB / NoSQL", "Schema Architecture & Aggregations", 90],
+];
+
+const designTools = [
+  ["FG", "Figma (UI/UX Design)", "Design Systems, Auto-layout, Interactive Prototypes", "98.5%", "#ff007a"],
+  ["AI", "Adobe Illustrator", "Precision Vector Pen, Monograms & Brand Marks", "99.0%", "#fbbf24"],
+  ["PS", "Adobe Photoshop", "High-End Compositing, Texturing, Retouching", "96.0%", "#38bdf8"],
+  ["XD", "Adobe XD", "Wireframing, User Flows & Rapid Prototypes", "94.0%", "#ec4899"],
+  ["FX", "Kinetic Motion & SVG Vectors", "Bespoke Vector Morphing, Easing Curves, WebGL/Shader Staging", "97.5%", "#a855f7"],
+];
+
 function Home() {
   const [workCategory, setWorkCategory] = useState("web");
-  const visibleProjects = projects.filter(
-    ([, , , , , category]) => category === workCategory,
-  );
+  const [graphicCategory, setGraphicCategory] = useState("all");
+  const visibleProjects =
+    workCategory === "web"
+      ? projects
+      : graphicProjects.filter(
+          ([, , , , , , , category]) =>
+            graphicCategory === "all" || category === graphicCategory,
+        );
 
   return (
     <main className="portfolio-main">
@@ -314,14 +390,35 @@ function Home() {
             Graphic Works
           </button>
         </div>
+        {workCategory === "graphic" && (
+          <div className="graphic-tabs" role="tablist" aria-label="Graphic design categories">
+            {[
+              ["all", "All"],
+              ["flayer", "Flayer Design"],
+              ["poster", "Poster Design"],
+              ["brand", "Brand Identity"],
+              ["logo", "Logo Design"],
+            ].map(([category, label]) => (
+              <button
+                className={graphicCategory === category ? "active" : ""}
+                onClick={() => setGraphicCategory(category)}
+                role="tab"
+                aria-selected={graphicCategory === category}
+                key={category}
+              >
+                {label}
+              </button>
+            ))}
+          </div>
+        )}
         <div className="project-grid">
-          {visibleProjects.map(([id, type, name, text, tags]) => (
+          {visibleProjects.map(([id, type, name, text, tags, url, image]) => (
             <article className="project-card" key={name}>
               <div className="terminal-bar">
                 <span>● ● ●</span> NODE.{id} // {type}
               </div>
-              <div className={`project-art art-${id}`}>
-                <i>{name}</i>
+              <div className={`project-art art-${id}${image ? " has-image" : ""}`}>
+                {image ? <img src={image} alt={`${name} design`} /> : <i>{name}</i>}
               </div>
               <div className="project-info">
                 <small>
@@ -330,11 +427,149 @@ function Home() {
                 <h3>{name}</h3>
                 <p>{text}</p>
                 <span className="project-tags">{tags}</span>
-                <a href="#contact">VIEW PROJECT ↗</a>
+                <a href={url} target="_blank" rel="noreferrer">
+                  VIEW PROJECT ↗
+                </a>
               </div>
             </article>
           ))}
         </div>
+        {workCategory === "web" && (
+          <article className="stack-benchmark">
+            <div className="benchmark-grid-lines" aria-hidden="true" />
+            <div className="benchmark-scanner" aria-hidden="true" />
+            <div className="benchmark-header">
+              <div className="benchmark-title">
+                <span className="benchmark-live-dot" />
+                <div>
+                  <small>SYSTEM TELEMETRY // STACK BENCHMARK</small>
+                  <h3>WEB DEVELOPER PROFICIENCY METRICS</h3>
+                </div>
+              </div>
+              <div className="benchmark-summary">
+                <small>STACK AGGREGATE</small>
+                <strong>96.4 <span>/ 100</span></strong>
+                <b>ACTIVE // L5</b>
+              </div>
+            </div>
+            <div className="benchmark-body">
+              <div className="benchmark-tools">
+                {benchmarkTools.map(([id, name, role, score]) => (
+                  <div className="benchmark-tool" key={name}>
+                    <span className="benchmark-id">{id}</span>
+                    <div className="benchmark-tool-name">
+                      <strong>{name}</strong>
+                      <small>// {role}</small>
+                    </div>
+                    <div className="benchmark-bar">
+                      <span style={{ "--bar-width": `${score}%` }} />
+                    </div>
+                    <b className="benchmark-score">{score}%</b>
+                  </div>
+                ))}
+              </div>
+              <div className="benchmark-runtime">
+                <div className="benchmark-gauge" style={{ "--gauge-progress": "96.4%" }}>
+                  <span className="gauge-ring" />
+                  <strong>96%</strong>
+                  <small>FULL MASTERY</small>
+                </div>
+                <div className="runtime-stat">
+                  <small>VERSION CONTROL</small>
+                  <strong>Git &amp; GitHub Actions <b>98%</b></strong>
+                  <span>Branching // CI/CD // Releases</span>
+                </div>
+                <div className="runtime-stat">
+                  <small>RUNTIME EFFICIENCY</small>
+                  <strong>60 FPS Hardware Sync <b>99%</b></strong>
+                  <span>Lighthouse PWA Score: 100</span>
+                </div>
+              </div>
+            </div>
+          </article>
+        )}
+        {workCategory === "graphic" && (
+          <article className="design-benchmark">
+            <div className="design-radar-glow" aria-hidden="true" />
+            <div className="design-header">
+              <div className="benchmark-title">
+                <span className="design-live-dot" />
+                <div>
+                  <small>SYSTEM TELEMETRY // CREATIVE DESIGN BENCHMARK</small>
+                  <h3>GRAPHIC DESIGN &amp; UI/UX TOOL MASTERY</h3>
+                </div>
+              </div>
+              <div className="design-summary">
+                <small>DESIGN FIDELITY</small>
+                <strong>97.8 <span>/ 100</span></strong>
+                <b>HAUTE CRAFT</b>
+              </div>
+            </div>
+            <div className="design-body">
+              <div className="design-radar" aria-label="Creative design proficiency radar">
+                <svg viewBox="0 0 500 424" role="img">
+                  <defs>
+                    <linearGradient id="designRadarFill" x1="0" x2="1" y1="0" y2="1">
+                      <stop offset="0" stopColor="#ff007a" stopOpacity=".45" />
+                      <stop offset=".6" stopColor="#a855f7" stopOpacity=".3" />
+                      <stop offset="1" stopColor="#fbbf24" stopOpacity=".2" />
+                    </linearGradient>
+                    <radialGradient id="designRadarGlow">
+                      <stop offset="0" stopColor="#f1e8ed" stopOpacity=".35" />
+                      <stop offset="1" stopColor="#faf8f9" stopOpacity="0" />
+                    </radialGradient>
+                  </defs>
+                  <circle cx="250" cy="212" r="140" fill="url(#designRadarGlow)" />
+                  <g className="radar-reticle">
+                    <circle cx="250" cy="212" r="148" fill="none" stroke="#f3eaee" strokeDasharray="14 26" />
+                    <circle cx="250" cy="212" r="158" fill="none" stroke="#fbbf24" strokeDasharray="4 16" />
+                  </g>
+                  <g className="radar-grid">
+                    {["250,188 271,200 271,224 250,236 229,224 229,200", "250,164 292,188 292,236 250,260 208,236 208,188", "250,140 312,176 312,248 250,284 188,248 188,176", "250,116 333,164 333,260 250,308 167,260 167,164", "250,92 354,152 354,272 250,332 146,272 146,152"].map((points) => <polygon key={points} points={points} />)}
+                    <line x1="250" y1="212" x2="250" y2="82" />
+                    <line x1="250" y1="212" x2="362" y2="147" />
+                    <line x1="250" y1="212" x2="362" y2="277" />
+                    <line x1="250" y1="212" x2="250" y2="342" />
+                    <line x1="250" y1="212" x2="138" y2="277" />
+                    <line x1="250" y1="212" x2="138" y2="147" />
+                  </g>
+                  <g className="radar-sweep">
+                    <path d="M250 212 L250 75 A137 137 0 0 1 350 122 Z" fill="url(#designRadarGlow)" />
+                    <line x1="250" y1="212" x2="250" y2="76" />
+                  </g>
+                  <polygon className="radar-proficiency" points="250,92 355,152 355,274 250,332 145,274 145,152" fill="url(#designRadarFill)" />
+                  <g className="radar-vertices" aria-hidden="true">
+                    <circle cx="250" cy="92" r="6" />
+                    <circle cx="355" cy="152" r="6" />
+                    <circle cx="355" cy="274" r="6" />
+                    <circle cx="250" cy="332" r="6" />
+                    <circle cx="145" cy="274" r="6" />
+                    <circle cx="145" cy="152" r="6" />
+                  </g>
+                </svg>
+                <span className="radar-label radar-top">FIGMA // UI/UX <b>98.5%</b></span>
+                <span className="radar-label radar-right-top">ILLUSTRATOR <b>99.0%</b></span>
+                <span className="radar-label radar-right-bottom">PHOTOSHOP <b>96.0%</b></span>
+                <span className="radar-label radar-bottom">BRAND IDENTITY <b>97.0%</b></span>
+                <span className="radar-label radar-left-bottom">HAUTE TYPO <b>98.0%</b></span>
+                <span className="radar-label radar-left-top">MOTION SVG <b>97.5%</b></span>
+              </div>
+              <div className="design-tools">
+                {designTools.map(([code, name, description, score, color]) => (
+                  <div className="design-tool" key={name}>
+                    <span className="design-tool-icon" style={{ "--tool-color": color }}>{code}</span>
+                    <div className="design-tool-copy">
+                      <strong>{name}</strong>
+                      <small>{description}</small>
+                      <div className="design-tool-bar"><span style={{ width: score, "--tool-color": color }} /></div>
+                    </div>
+                    <b style={{ color }}>{score}</b>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </article>
+        )}
       </section>
 
       <section className="contact-section" id="contact">
