@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thank You | Kisimoni</title>
+    <style>
+      :root {
+        --bg: #0a0e15;
+        --panel: #121922;
+        --panel-strong: #181f2b;
+        --line: rgba(148, 163, 184, 0.25);
+        --text: #edf6f8;
+        --muted: #aab9c2;
+        --cyan: #00f5ff;
+        --pink: #ff4a8e;
+      }
+
+      * { box-sizing: border-box; }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        background:
+          radial-gradient(circle at center, rgba(0, 245, 255, 0.12), transparent 35%),
+          radial-gradient(circle at 20% 20%, rgba(255, 74, 142, 0.08), transparent 28%),
+          var(--bg);
+        color: var(--text);
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      .card {
+        width: min(640px, calc(100% - 28px));
+        padding: 42px 28px;
+        text-align: center;
+        background: rgba(18, 25, 34, 0.92);
+        border: 1px solid var(--line);
+        box-shadow: 0 22px 55px rgba(0, 0, 0, 0.28);
+      }
+
+      .badge {
+        display: inline-block;
+        margin-bottom: 18px;
+        padding: 8px 12px;
+        border: 1px solid rgba(0, 245, 255, 0.7);
+        color: var(--cyan);
+        background: rgba(0, 245, 255, 0.08);
+        font-size: 11px;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+      }
+
+      h1 {
+        margin: 0 0 16px;
+        font-size: clamp(2.1rem, 4vw, 4rem);
+        letter-spacing: -0.06em;
+      }
+
+      p {
+        margin: 0 auto;
+        max-width: 520px;
+        color: var(--muted);
+        line-height: 1.7;
+        font-size: 1.02rem;
+      }
+
+      .actions {
+        margin-top: 28px;
+      }
+
+      .button {
+        display: inline-block;
+        padding: 14px 20px;
+        color: #041d20;
+        background: var(--cyan);
+        text-decoration: none;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="card">
+      <div class="badge">Message Sent</div>
+      <h1>Thank you.</h1>
+      <p>
+        Your message has been delivered successfully. I will get back to you as soon as possible.
+      </p>
+      <div class="actions">
+        <a class="button" href="/">Back to portfolio</a>
+      </div>
+    </main>
+  </body>
+</html>

@@ -37,7 +37,12 @@ function Navbar() {
 
   return (
     <header className="site-header">
-      <div className="brand-lockup"><span className="status-dot" /><a href="#home" className="brand-name">KISIMONI AUBAIN <span>// DEV &amp; DESIGN</span></a></div>
+      <div className="brand-lockup">
+
+      <span className="status-dot" /><a href="#home" className="brand-name">
+        KISIMONI AUBAIN 
+        <span>// DEV &amp; DESIGN</span></a>
+      </div>
       <button className={`menu-dots ${menuOpen ? "open" : ""}`} type="button" aria-label="Toggle navigation" aria-expanded={menuOpen} aria-controls="mobile-navigation" onClick={() => setMenuOpen((open) => !open)}><span /><span /><span /></button>
       <nav id="mobile-navigation" className={`nav-links ${menuOpen ? "open" : ""}`}>
         {navigationItems.map(([id, label]) => (

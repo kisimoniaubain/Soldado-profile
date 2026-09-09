@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
+import emailjs from "@emailjs/browser";
 import me from "../assets/me.png";
 import soldadoLogo from "../assets/20251121_065728.png";
 import soldadoMark from "../assets/20251121_0657281.png";
@@ -181,16 +182,21 @@ const services = [
   ],
   [
     "02",
+    "Backend Development",
+    "Robust and scalable server-side applications built with modern backend technologies, ensuring high performance and seamless integration.",
+  ],
+  [
+    "03",
     "UI / UX Design",
     "Clean, intuitive interfaces designed around usability and strong visual hierarchy. Wireframing, prototyping, and design system governance.",
   ],
   [
-    "03",
+    "04",
     "Graphic Design",
     "Logos, branding, posters, and digital visuals that communicate clearly and creatively with distinctive aesthetic character.",
   ],
   [
-    "04",
+    "05",
     "Full-Stack Development",
     "Complete web applications connecting modern frontend interfaces with reliable backend systems, custom APIs, and scalable databases.",
   ],
@@ -215,8 +221,22 @@ const designTools = [
 ];
 
 function Home() {
+  const formRef = useRef(null);
   const [workCategory, setWorkCategory] = useState("web");
   const [graphicCategory, setGraphicCategory] = useState("all");
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
+  const [isSending, setIsSending] = useState(false);
+  const [feedback, setFeedback] = useState("");
+  const [feedbackType, setFeedbackType] = useState("success");
+
+  const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID || "service_0n7u9ra";
+  const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || "template_o47h07g";
+  const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || "w9H1Onw0PA9CSEtYf";
+
   const visibleProjects =
     workCategory === "web"
       ? projects
@@ -224,6 +244,43 @@ function Home() {
           ([, , , , , , , category]) =>
             graphicCategory === "all" || category === graphicCategory,
         );
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData((current) => ({ ...current, [name]: value }));
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    setIsSending(true);
+    setFeedback("");
+
+    if (formRef.current) {
+      const avatar = `https://ui-avatars.com/api/?name=${encodeURIComponent(
+        formData.name || "Client",
+      )}&background=random`;
+      formRef.current.avatar.value = avatar;
+    }
+
+    emailjs
+      .sendForm(serviceId, templateId, formRef.current, publicKey)
+      .then(() => {
+        setFeedbackType("success");
+        setFeedback("Message sent successfully. Thank you for reaching out.");
+        setFormData({ name: "", email: "", message: "" });
+        if (formRef.current) {
+          formRef.current.reset();
+        }
+      })
+      .catch((error) => {
+        setFeedbackType("error");
+        setFeedback("Message failed to send. Please try again in a moment.");
+        console.error(error);
+      })
+      .finally(() => {
+        setIsSending(false);
+      });
+  };
 
   return (
     <main className="portfolio-main">
@@ -316,6 +373,8 @@ function Home() {
           <a href="#contact">MORE ABOUT ME →</a>
         </div>
       </section>
+
+
       <section className="skills-section content-section" id="skills">
         <div className="section-heading">
           <div>
@@ -339,7 +398,7 @@ function Home() {
           ))}
         </div>
       </section>
-            <section className="services-section content-section" id="services">
+      <section className="services-section content-section" id="services">
         <div className="section-heading">
           <div>
             <div className="section-label">04 / SERVICES</div>
@@ -579,10 +638,71 @@ function Home() {
           I'm always interested in new projects, creative collaborations and
           opportunities to build something meaningful together.
         </p>
-        <a className="contact-button" href="mailto:hello@kisimoni.dev">
-          hello@kisimoni.dev ↗
-        </a>
-        <small>● CURRENT QUEUE: OPEN FOR Q2-Q3 COLLABORATIONS</small>
+
+        <div className="contact-layout">
+          <div className="contact-meta">
+            <h3>Let's create something memorable.</h3>
+            <p>
+              Share a few details and I'll get back to you with the right next
+              step for your project.
+            </p>
+            <a href="mailto:hello@kisimoni.dev">hello@kisimoni.dev ↗</a>
+            <small>● CURRENT QUEUE: OPEN FOR Q2-Q3 COLLABORATIONS</small>
+          </div>
+
+          <form ref={formRef} className="contact-form" onSubmit={handleSubmit}>
+            <input type="hidden" name="avatar" />
+
+            <div className="contact-field">
+              <label htmlFor="name">Name</label>
+              <input
+                id="name"
+                name="user_name"
+                type="text"
+                placeholder="Your name"
+                value={formData.name}
+                onChange={handleChange}
+                required
+              />
+            </div>
+
+            <div className="contact-field">
+              <label htmlFor="email">Email</label>
+              <input
+                id="email"
+                name="user_email"
+                type="email"
+                placeholder="you@example.com"
+                value={formData.email}
+                onChange={handleChange}
+                required
+              />
+            </div>
+
+            <div className="contact-field">
+              <label htmlFor="message">Project brief</label>
+              <textarea
+                id="message"
+                name="message"
+                rows="6"
+                placeholder="Tell me about your idea, timeline, and goals..."
+                value={formData.message}
+                onChange={handleChange}
+                required
+              />
+            </div>
+
+            <button type="submit" className="contact-button" disabled={isSending}>
+              {isSending ? "Sending..." : "Send message"}
+            </button>
+
+            {feedback && (
+              <p className={`form-feedback ${feedbackType}`} role="status" aria-live="polite">
+                {feedback}
+              </p>
+            )}
+          </form>
+        </div>
       </section>
     </main>
   );
